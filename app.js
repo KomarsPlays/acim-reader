@@ -243,26 +243,30 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Selection Handling
-    function handleSelection(e) {
+    let selectionDebounce = null;
+
+    function handleSelectionChange() {
         // Only allow selection in reading view
         if (state.currentView !== 'reading') return;
 
-        // Hide popup if clicking outside
-        if (e.target.closest('#selection-popup')) return;
-
-        setTimeout(() => {
+        clearTimeout(selectionDebounce);
+        selectionDebounce = setTimeout(() => {
             const selection = window.getSelection();
             const text = selection.toString().trim();
 
             if (text.length > 5) { // Minimum length for a phrase
                 const range = selection.getRangeAt(0);
                 const rect = range.getBoundingClientRect();
-
                 showPopup(rect, text);
             } else {
                 hidePopup();
             }
-        }, 10);
+        }, 300);
+    }
+
+    function handlePopupClick(e) {
+        // Prevent hiding popup when clicking inside it
+        if (e.target.closest('#selection-popup')) return;
     }
 
     function showPopup(rect, text) {
@@ -331,9 +335,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         els.clearPhrasesBtn.addEventListener('click', clearPhrases);
 
-        // Text Selection
-        document.addEventListener('mouseup', handleSelection);
-        document.addEventListener('touchend', handleSelection);
+        // Text Selection - use selectionchange for reliable mobile support
+        document.addEventListener('selectionchange', handleSelectionChange);
 
         // Popup Buttons
         els.popupYesBtn.addEventListener('click', () => {
