@@ -271,19 +271,41 @@ document.addEventListener('DOMContentLoaded', () => {
 
         state.pendingSelection = text;
 
-        // Calculate position (centered above selection)
-        const top = rect.top + window.scrollY;
-        const left = rect.left + window.scrollX + (rect.width / 2);
+        // Calculate position
+        const isMobile = window.innerWidth <= 600;
+        
+        if (isMobile) {
+            // On mobile, show it fixed at the bottom to avoid native copy/paste menu overlap
+            els.popup.style.top = 'auto';
+            els.popup.style.bottom = '20px';
+            els.popup.style.left = '50%';
+            els.popup.style.position = 'fixed';
+            els.popup.style.transform = 'translate(-50%, 0)';
+            
+            // Hide arrow on mobile bottom view
+            const arrow = els.popup.querySelector('.popup-arrow');
+            if(arrow) arrow.style.display = 'none';
+        } else {
+            // On desktop, show it above the selection
+            const top = rect.top + window.scrollY;
+            const left = rect.left + window.scrollX + (rect.width / 2);
 
-        // Ensure popup doesn't go off-screen
-        const popupWidth = 200; // estimated
-        let adjustedLeft = left;
+            const popupWidth = 200; // estimated
+            let adjustedLeft = left;
 
-        if (left - popupWidth / 2 < 10) adjustedLeft = popupWidth / 2 + 10;
-        if (left + popupWidth / 2 > window.innerWidth - 10) adjustedLeft = window.innerWidth - popupWidth / 2 - 10;
+            if (left - popupWidth / 2 < 10) adjustedLeft = popupWidth / 2 + 10;
+            if (left + popupWidth / 2 > window.innerWidth - 10) adjustedLeft = window.innerWidth - popupWidth / 2 - 10;
 
-        els.popup.style.top = `${top}px`;
-        els.popup.style.left = `${adjustedLeft}px`;
+            els.popup.style.top = `${top}px`;
+            els.popup.style.bottom = 'auto';
+            els.popup.style.left = `${adjustedLeft}px`;
+            els.popup.style.position = 'absolute';
+            els.popup.style.transform = 'translate(-50%, -100%)';
+            
+            // Show arrow on desktop
+            const arrow = els.popup.querySelector('.popup-arrow');
+            if(arrow) arrow.style.display = 'block';
+        }
 
         els.popup.classList.remove('hidden');
     }
