@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Курс Чудес</title>
+    <!-- Google Fonts: Lora for reading, Inter for UI elements -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Top Bar for Phrases of the Day -->
+    <div id="phrases-bar" class="phrases-bar empty">
+        <div class="phrases-header">
+            <h3>Фразы дня</h3>
+            <div class="phrases-actions">
+                <button id="toggle-phrases-btn" class="icon-btn" aria-label="Свернуть/Развернуть"
+                    title="Свернуть/Развернуть">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="chevron-icon">
+                        <polyline points="18 15 12 9 6 15"></polyline>
+                    </svg>
+                </button>
+                <button id="clear-phrases-btn" class="icon-btn" aria-label="Очистить фразы" title="Очистить все фразы">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="3 6 5 6 21 6"></polyline>
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                        <line x1="10" y1="11" x2="10" y2="17"></line>
+                        <line x1="14" y1="11" x2="14" y2="17"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div id="phrases-list" class="phrases-list expanded">
+            <!-- Phrases will be rendered here -->
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Table of Contents Screen -->
+        <section id="toc-view" class="view active">
+            <header class="toc-header">
+                <h1>Курс Чудес</h1>
+                <p class="subtitle">Учебник для студентов (Уроки 1-365)</p>
+            </header>
+
+            <!-- Loading Indicator -->
+            <div id="loading" class="loading">Загрузка уроков...</div>
+
+            <div id="toc-list" class="toc-list">
+                <!-- TOC items will be rendered here -->
+            </div>
+        </section>
+
+        <!-- Reading Screen -->
+        <section id="reading-view" class="view">
+            <div id="lessons-container" class="lessons-container">
+                <!-- Lessons text will be rendered here -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Floating Back to TOC Button -->
+    <button id="back-to-toc-btn" class="floating-btn hidden" aria-label="К оглавлению" title="К оглавлению">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+    </button>
+
+    <!-- Popup for selecting a phrase -->
+    <div id="selection-popup" class="selection-popup hidden">
+        <p class="popup-text">Сделать <span id="phrase-index">1</span> фразой дня?</p>
+        <div class="popup-actions">
+            <button id="popup-yes" class="btn btn-primary">Да</button>
+            <button id="popup-no" class="btn btn-secondary">Нет</button>
+        </div>
+        <!-- Arrow pointing to the selection -->
+        <div class="popup-arrow"></div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

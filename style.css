@@ -1,0 +1,487 @@
+/* 
+ * Course in Miracles Reader Styles
+ * Warm, minimal book-like theme
+ * Typography: Lora for text, Inter for UI
+ */
+
+:root {
+    /* Color Palette */
+    --bg-page: #FAF7F2;
+    /* Warm off-white, easy on the eyes */
+    --bg-paper: #FFFFFF;
+    /* Pure white for cards/lessons */
+    --text-main: #2C2825;
+    /* Very dark brown/grey, softer than black */
+    --text-muted: #736B63;
+    /* Muted brown/grey for secondary text */
+    --accent: #D4A373;
+    /* Warm earthy accent */
+    --accent-hover: #C59261;
+    --accent-light: #FBEBDD;
+    /* Very light accent background */
+    --phrase-bg: #EEDBCD;
+    /* Warm beige for phrases of the day */
+    --border: #E8E2D9;
+    --shadow-sm: 0 2px 4px rgba(44, 40, 37, 0.05);
+    --shadow-md: 0 4px 12px rgba(44, 40, 37, 0.08);
+    --shadow-lg: 0 8px 24px rgba(44, 40, 37, 0.12);
+
+    /* Typography */
+    --font-reading: 'Lora', serif;
+    --font-ui: 'Inter', sans-serif;
+
+    /* Layout */
+    --max-width: 800px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 48px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-reading);
+    background-color: var(--bg-page);
+    color: var(--text-main);
+    line-height: 1.6;
+    font-size: 18px;
+    -webkit-font-smoothing: antialiased;
+    padding-top: 60px;
+    /* Space for phrases bar */
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-weight: 500;
+    line-height: 1.3;
+    margin-bottom: var(--spacing-md);
+    color: #1A1816;
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+}
+
+/* Utilities */
+.hidden {
+    display: none !important;
+}
+
+.container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: var(--spacing-md);
+}
+
+.view {
+    display: none;
+}
+
+.view.active {
+    display: block;
+    animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Typography elements */
+p {
+    margin-bottom: 1.5em;
+}
+
+button {
+    font-family: var(--font-ui);
+    cursor: pointer;
+    border: none;
+    background: none;
+}
+
+/* =========================================
+   Table of Contents (TOC)
+   ========================================= */
+
+.toc-header {
+    text-align: center;
+    margin: var(--spacing-xl) 0;
+    font-family: var(--font-ui);
+}
+
+.subtitle {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.loading {
+    text-align: center;
+    color: var(--text-muted);
+    font-style: italic;
+    padding: var(--spacing-xl) 0;
+}
+
+.toc-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-xl);
+}
+
+.toc-item {
+    background: var(--bg-paper);
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-radius: 8px;
+    box-shadow: var(--shadow-sm);
+    text-decoration: none;
+    color: var(--text-main);
+    display: flex;
+    align-items: baseline;
+    gap: var(--spacing-md);
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+}
+
+.toc-item:hover,
+.toc-item:focus {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--accent-light);
+    outline: none;
+}
+
+.toc-number {
+    font-family: var(--font-ui);
+    font-weight: 600;
+    color: var(--accent);
+    min-width: 60px;
+    font-size: 0.9rem;
+}
+
+.toc-title {
+    font-family: var(--font-reading);
+    font-size: 1.1rem;
+    color: var(--text-main);
+}
+
+/* =========================================
+   Lessons Reading View
+   ========================================= */
+
+.lessons-container {
+    padding-bottom: 15vh;
+}
+
+.lesson-article {
+    background: var(--bg-paper);
+    padding: var(--spacing-xl);
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+    margin-bottom: var(--spacing-xl);
+    scroll-margin-top: 100px;
+    /* Leave space for fixed phrases bar */
+}
+
+.lesson-header {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--border);
+}
+
+.lesson-number {
+    font-family: var(--font-ui);
+    color: var(--accent);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+    margin-bottom: var(--spacing-sm);
+    display: block;
+}
+
+.lesson-title {
+    font-family: var(--font-reading);
+    color: var(--text-main);
+    font-size: 1.8rem;
+    margin: 0;
+}
+
+.lesson-text {
+    font-size: 1.15rem;
+    /* Larger for comfortable reading */
+    line-height: 1.8;
+}
+
+.lesson-verse {
+    font-style: italic;
+    margin-left: var(--spacing-md);
+    padding-left: var(--spacing-md);
+    border-left: 2px solid var(--accent);
+    color: var(--text-muted);
+    white-space: pre-line;
+    margin-top: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+}
+
+/* =========================================
+   Phrases of the Day Bar
+   ========================================= */
+
+.phrases-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--phrase-bg);
+    border-bottom: 1px solid var(--accent);
+    z-index: 100;
+    box-shadow: var(--shadow-md);
+    transition: transform 0.3s ease;
+    font-family: var(--font-ui);
+}
+
+/* When empty, it hides mostly but keeps space */
+.phrases-bar.empty {
+    transform: translateY(-100%);
+    box-shadow: none;
+    border: none;
+}
+
+.phrases-header {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: var(--spacing-sm) var(--spacing-md);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.phrases-header h3 {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--text-main);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+}
+
+.phrases-actions {
+    display: flex;
+    gap: var(--spacing-sm);
+}
+
+.icon-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    color: var(--text-muted);
+    transition: all 0.2s ease;
+}
+
+.icon-btn:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+    color: var(--text-main);
+}
+
+.chevron-icon {
+    transition: transform 0.3s ease;
+}
+
+.phrases-list.collapsed {
+    display: none;
+}
+
+.phrases-list.collapsed+.phrases-header .chevron-icon {
+    transform: rotate(180deg);
+}
+
+.phrases-list {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+    max-height: 30vh;
+    overflow-y: auto;
+}
+
+.phrase-item {
+    padding: var(--spacing-md) 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    font-family: var(--font-reading);
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--text-main);
+    font-weight: 500;
+    text-align: center;
+}
+
+.phrase-item:first-child {
+    border-top: none;
+}
+
+.phrase-index {
+    font-family: var(--font-ui);
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 600;
+    color: var(--accent);
+    display: inline-block;
+    padding: 2px 6px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 12px;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+/* =========================================
+   Selection Popup
+   ========================================= */
+
+.selection-popup {
+    position: absolute;
+    /* Will be set via JS */
+    background: var(--text-main);
+    color: white;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: 8px;
+    box-shadow: var(--shadow-lg);
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    font-family: var(--font-ui);
+    transform: translate(-50%, -100%);
+    margin-top: -10px;
+    /* Spacing from selection */
+    pointer-events: auto;
+}
+
+.popup-text {
+    margin: 0;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.popup-actions {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+}
+
+.btn {
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.btn-primary {
+    background: var(--accent);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: var(--accent-hover);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.popup-arrow {
+    position: absolute;
+    bottom: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid var(--text-main);
+}
+
+/* =========================================
+   Floating Button
+   ========================================= */
+
+.floating-btn {
+    position: fixed;
+    bottom: var(--spacing-xl);
+    right: var(--spacing-lg);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--text-main);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-md);
+    z-index: 90;
+    transition: all 0.3s ease;
+}
+
+.floating-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    background-color: var(--accent-hover);
+}
+
+/* =========================================
+   Responsive Adjustments
+   ========================================= */
+
+@media (max-width: 600px) {
+    .lesson-article {
+        padding: var(--spacing-md);
+    }
+
+    .toc-item {
+        flex-direction: column;
+        gap: 4px;
+        padding: var(--spacing-md);
+    }
+
+    .lesson-title {
+        font-size: 1.5rem;
+    }
+
+    .lesson-text {
+        font-size: 1.05rem;
+    }
+}
