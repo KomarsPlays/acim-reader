@@ -197,6 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
             numSpan.textContent = `Фраза ${index + 1}`;
 
             const textSpan = document.createElement('span');
+            textSpan.style.whiteSpace = 'pre-line';
             textSpan.textContent = phrase;
 
             div.appendChild(numSpan);
@@ -244,24 +245,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Selection Handling
     let selectionDebounce = null;
+    let lastSelectedText = '';
 
     function handleSelectionChange() {
         // Only allow selection in reading view
         if (state.currentView !== 'reading') return;
 
+        // Quick check - avoid expensive operations if nothing changed
+        const sel = window.getSelection();
+        const quickText = sel.toString().trim();
+        if (quickText === lastSelectedText) return;
+
         clearTimeout(selectionDebounce);
         selectionDebounce = setTimeout(() => {
-            const selection = window.getSelection();
-            const text = selection.toString().trim();
+            try {
+                const selection = window.getSelection();
+                const text = selection.toString().trim();
 
-            if (text.length > 5) { // Minimum length for a phrase
-                const range = selection.getRangeAt(0);
-                const rect = range.getBoundingClientRect();
-                showPopup(rect, text);
-            } else {
-                hidePopup();
+                lastSelectedText = text;
+
+                if (text.length > 5) {
+                    const range = selection.getRangeAt(0);
+                    const rect = range.getBoundingClientRect();
+                    showPopup(rect, text);
+                } else {
+                    hidePopup();
+                }
+            } catch(e) {
+                // getRangeAt can throw if selection is collapsed
             }
-        }, 300);
+        }, 400);
     }
 
     function handlePopupClick(e) {
