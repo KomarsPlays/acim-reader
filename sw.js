@@ -1,4 +1,4 @@
-const CACHE_NAME = 'acim-reader-cache-v9';
+const CACHE_NAME = 'acim-reader-cache-v10';
 const urlsToCache = [
   '/',
   '/index.html',
