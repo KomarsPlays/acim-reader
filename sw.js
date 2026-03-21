@@ -1,4 +1,4 @@
-const CACHE_NAME = 'acim-reader-cache-v8';
+const CACHE_NAME = 'acim-reader-cache-v9';
 const urlsToCache = [
   '/',
   '/index.html',
@@ -6,10 +6,10 @@ const urlsToCache = [
   '/app.js',
   '/lessons.json',
   '/manifest.json',
-  '/splash.png?v=2',
-  '/icons/icon-192.png?v=2',
-  '/icons/icon-512.png?v=2',
-  '/icons/apple-touch-icon.png?v=2'
+  '/splash.png',
+  '/icons/icon-app-180.png',
+  '/icons/icon-app-192.png',
+  '/icons/icon-app-512.png'
 ];
 
 // Установка Service Worker и кэширование файлов
