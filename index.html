@@ -13,6 +13,7 @@
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#FAF7F2">
     <link rel="apple-touch-icon" href="icons/icon-192.png">
+    <link rel="apple-touch-startup-image" href="splash.png">
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap"
         rel="stylesheet">
@@ -20,6 +21,23 @@
 </head>
 
 <body>
+    <!-- Splash Screen (Заставка) -->
+    <div id="splashScreen" class="splash-screen">
+        <img src="splash.png" alt="Курс Чудес Заставка">
+    </div>
+    <script>
+        // Скрываем заставку через 1.8 секунд после загрузки для создания атмосферы
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const splash = document.getElementById('splashScreen');
+                if (splash) {
+                    splash.classList.add('hidden');
+                    setTimeout(() => splash.remove(), 800); // Полное удаление из DOM после анимации
+                }
+            }, 1800);
+        });
+    </script>
+
     <!-- Top Bar for Phrases of the Day -->
     <div id="phrases-bar" class="phrases-bar empty">
         <div class="phrases-header">
